@@ -42,6 +42,13 @@ const dodelete = async () => {
     // 단순하게 화면이동만 할 때는 {}안쓰고 ('/')만 해도됨
   }
 }
+
+// const update = () => {
+//     const id = state.data.id;
+//     router.push({
+//         path: `/mod/${id}`
+//     })
+// }
 </script>
 
 <template>
@@ -52,7 +59,10 @@ const dodelete = async () => {
 <div>내용: {{ state.data.contents }}</div>
 <div>
     <button @click="dodelete">삭제</button>
-    <button @click="create">수정</button>
+    <router-link :to="`/mod/${state.data.id}`">
+        <button>수정</button>
+    </router-link>
+    <!-- <button @click="update">수정</button> -->
 </div>
 </template>
 
