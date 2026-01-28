@@ -6,6 +6,7 @@ import httpService from '@/services/httpService';
 //주소이동할 때 사용한다.
 const router = useRouter();
 
+//reactive사용 이유 => 수정한값이 화면에도 보여지게 하기위해서 사용
 const state = reactive({
   board: {
     title: '',
@@ -17,7 +18,7 @@ const submit = async () => {
     //제목이 입력되어 있지 않으면 "제목을 입력해 주세요!" alert
     //내용이 입력되어 있지 않으면 "내용을 입력해 주세요!" alert
     //메소드 종료
-    if(!state.board.title) {
+    if(!state.board.title) { //빈문자열일때 라는 뜻
         alert('제목을 입력해 주세요!');
         return;
     } else if(!state.board.contents) {
@@ -35,6 +36,8 @@ const submit = async () => {
       router.push({
           path: '/'
       });
+    } else {
+        alert('등록에 실패하였습니다.');
     }
 }
 

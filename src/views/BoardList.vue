@@ -21,9 +21,9 @@ onMounted(async () => {
         <th>작성일</th>
     </tr>
     <tr v-for="item in state.list" :key="item.id">
-      <td>{{ item.id }}</td>
-      <td>{{ item.title }}</td>
-      <td>{{ item.createdAt }}</td>
+        <td>{{ item.id }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.createdAt }}</td>
     </tr>
 </table>
 </template>
