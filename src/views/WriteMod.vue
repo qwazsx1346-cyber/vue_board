@@ -33,12 +33,14 @@ const submit = async () => {
     if(result === '성공') { //데이터 타입과 내용이 모두 같다는 뜻은 === 사용.
       state.board.title = '',
       state.board.contents = '';
+      alert('등록에 성공하였습니다.');
       router.push({
           path: '/'
       });
     } else {
         alert('등록에 실패하였습니다.');
     }
+
 }
 
 </script>
