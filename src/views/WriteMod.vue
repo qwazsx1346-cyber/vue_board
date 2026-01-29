@@ -30,32 +30,41 @@ const submit = async () => {
         return;
     }
 
-    if(state.board.id === 0) {
-      const result = await httpService.save(state.board);
-      console.log('result:', result);
-
-      //result가 성공이면 제목, 내용 적혀있는거 모두 삭제해 주세요.
-
-      if(result === '성공') { //데이터 타입과 내용이 모두 같다는 뜻은 === 사용.
-        state.board.title = '',
-        state.board.contents = '';
-        alert('등록에 성공하였습니다.');
-        router.push({
-            path: '/'
-        });
-      } else {
-          alert('등록에 실패하였습니다.');
-      }
-    } else { //수정
-        const result = await httpService.update(state.board);
-        if(result) {
-            router.push(`/detail/${state.board.id}`) //디테일 화면으로 이동!!!
-        }
+    const result = await (state.board.id ? httpService.update(state.board) : httpService.save(state.board));
+    if(!result) {
+      alert(`글 ${state.mode}에 실패하였습니다.`);
+      return;
     }
+    const path = state.board.id ? `/detail/${state.board.id}` : '/';
+    router.push(path)
+
+    // if(state.board.id === 0) {
+    //   const result = await httpService.save(state.board);
+    //   console.log('result:', result);
+
+    //   //result가 성공이면 제목, 내용 적혀있는거 모두 삭제해 주세요.
+
+    //   if(result === 1) { //데이터 타입과 내용이 모두 같다는 뜻은 === 사용.
+    //     state.board.title = '',
+    //     state.board.contents = '';
+    //     alert('등록에 성공하였습니다.');
+    //     router.push({
+    //         path: '/'
+    //     });
+    //   } else {
+    //       alert('등록에 실패하였습니다.');
+    //   }
+    // } else { //수정
+    //     const result = await httpService.update(state.board);
+    //     if(result) {
+    //         router.push(`/detail/${state.board.id}`) //디테일 화면으로 이동!!!
+    //     }
+    // }
 }
 
 onMounted(async () => {
     if(route.params.id) {
+      state.mode = '수정'
       const id = route.params.id;
       state.board = await httpService.findById(id);
     }

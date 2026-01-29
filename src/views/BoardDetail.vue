@@ -7,7 +7,7 @@ const route = useRoute();
 const router = useRouter();
 
 const state = reactive({
-    data: {
+    data: { //이 칸을 비워두어도 작동은 되지만 어떤값이 들어오는지 눈으로 확인할 수 있도록 기재해주는것이 좋음.
         id: 0,
         title: '',
         contents: '',
@@ -16,31 +16,29 @@ const state = reactive({
 });
 
 onMounted(async () => {
+    console.log('typeof route.params.id: ', typeof route.params.id); //String타입
     console.log('route.params.id: ', route.params.id);
-
     const id = route.params.id;
     state.data = await httpService.findById(id);
-    console.log('state.data: ', state.data);
-
     //findById 통신하고 결과를 state.data에 담아주세요.
 })
 
 const dodelete = async () => {
-  if(!confirm('삭제하시겠습니까?') ) {
-      return;
-  }
+    if(!confirm('삭제하시겠습니까?') ) {
+        return;
+    }
 
-  const params = { id:state.data.id }
-  console.log(params);
-  const result = await httpService.delete(params);
-  console.log("Dodelete-result: " + result);
+    const params = { id:state.data.id }
+    console.log(params);
+    const result = await httpService.delete(params);
+    console.log("Dodelete-result: " + result);
 
-  if(result === 1) {
+    if(result === 1) {
     router.push({
         path: '/'
     });
     // 단순하게 화면이동만 할 때는 {}안쓰고 ('/')만 해도됨
-  }
+    }
 }
 
 // const update = () => {
