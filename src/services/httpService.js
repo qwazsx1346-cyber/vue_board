@@ -31,7 +31,6 @@ class HttpService {
         const res = await axios.delete(this.#url, { params });
         return res.data;
     }
-
 }
 
 export default new HttpService();

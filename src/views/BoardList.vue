@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import httpService from '@/services/httpService';
 
 const router = useRouter();

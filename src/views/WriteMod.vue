@@ -30,7 +30,9 @@ const submit = async () => {
         return;
     }
 
-    const result = await (state.board.id ? httpService.update(state.board) : httpService.save(state.board));
+    const result = await (state.board.id
+                          ? httpService.update(state.board)
+                          : httpService.save(state.board));
     if(!result) {
       alert(`글 ${state.mode}에 실패하였습니다.`);
       return;
